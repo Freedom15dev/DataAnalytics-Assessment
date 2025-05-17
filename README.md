@@ -30,6 +30,7 @@ Finally, I joined the user data with the results from Steps 1 and 2.
 Then I filtered to include only users who have both a savings plan and an investment plan.
 The results are sorted by deposit amount (from highest to lowest), and I limited the output to the top 100 users.
 
+![Image](https://github.com/user-attachments/assets/a4739a8d-0aa0-4371-9ea9-6b9caa2a1e07)
 
 Question 2 – Transaction Frequency Analysis
 Scenario: The finance team wants to analyze how often customers transact to segment them (e.g., frequent vs. occasional users).
@@ -59,6 +60,8 @@ Low frequency (minimal or infrequent activity)
 
 Finally, I summarized the data, counting how many users fall into each category and calculating their average monthly transactions.
 
+![Image](https://github.com/user-attachments/assets/f4986451-3794-4f00-976e-c39100f49fa3)
+
 
 Question 3 – Account Inactivity Alert
 Scenario: The ops team wants to flag accounts with no inflow transactions for over one year.
@@ -80,6 +83,7 @@ Step 3: Calculate Days of Inactivity and Filter
 I then calculated how many days have passed since the last inflow (or creation date, if no inflow exists).
 Finally, I filtered the results to return only plans that have been inactive for more than 365 days.
 
+![Image](https://github.com/user-attachments/assets/2b514461-8456-41fa-adf5-25f63c7fb87e)
 
 Question 4 – Customer Lifetime Value (CLV) Estimation
 Objective:
@@ -108,6 +112,12 @@ These are assumed to be actual deposit inflows.
 Step 3: Estimate CLV
 We applied the CLV formula above for each user.
 To avoid errors, we used NULLIF to make sure we don’t divide by zero (for users with tenure less than 1 month).
+
+![Image](https://github.com/user-attachments/assets/2b514461-8456-41fa-adf5-25f63c7fb87e)
+
+
+
+
 
 Notes & Challenges
 

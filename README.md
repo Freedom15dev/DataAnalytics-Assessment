@@ -58,3 +58,27 @@ Medium frequency
 Low frequency (minimal or infrequent activity)
 
 Finally, I summarized the data, counting how many users fall into each category and calculating their average monthly transactions.
+
+
+Question 3 – Account Inactivity Alert
+Scenario: The ops team wants to flag accounts with no inflow transactions for over one year.
+Task: Find all active accounts (savings or investments) with no transactions in the last 1 year (365 days) 
+
+
+How the Query Works:
+Step 1: Get the Last Inflow per Plan
+I checked the savings_savingsaccount table to find the most recent deposit (where confirmed_amount > 0) for each plan.
+This gives us the last time money came into each plan.
+I grouped the results by plan_id to keep it plan-specific.
+
+Step 2: Join with Active Plans
+Next, I pulled in only active plans from the plans_plan table — meaning they are not deleted or archived.
+I used a LEFT JOIN so that even plans with no deposit history at all would still be included.
+If a plan has never had a deposit, I fall back to using the plan’s created_on date instead.
+
+Step 3: Calculate Days of Inactivity and Filter
+I then calculated how many days have passed since the last inflow (or creation date, if no inflow exists).
+Finally, I filtered the results to return only plans that have been inactive for more than 365 days.
+
+
+

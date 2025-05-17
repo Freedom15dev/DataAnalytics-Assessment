@@ -81,4 +81,61 @@ I then calculated how many days have passed since the last inflow (or creation d
 Finally, I filtered the results to return only plans that have been inactive for more than 365 days.
 
 
+Question 4 – Customer Lifetime Value (CLV) Estimation
+Objective:
+The marketing team wants to know how valuable each customer is over time. So in this query, we estimate Customer Lifetime Value (CLV) using how long they've been active and how often they deposit.
+
+What We Calculated for Each User:
+Tenure (in months) – How long the user has been on the platform
+
+Total confirmed transactions – How many valid deposits they’ve made
+
+Estimated CLV – Using a simplified formula based on transaction behavior
+
+The CLV Formula Used:
+CLV =(Total Transactions/Tenure (in months)) × 12 × Average Profit per Transaction
+We assumed average profit per transaction = 0.1% of the transaction amount.
+
+How the Query Works:
+Step 1: Calculate Tenure (Months Since Signup)
+We took the number of days between today and the user’s signup date (date_joined) and converted it into months (by dividing by 30).
+This gives us how long each user has been with us.
+
+Step 2: Aggregate Confirmed Transactions
+We looked at the savings_savingsaccount table to count all confirmed transactions (confirmed_amount > 0) for each user.
+These are assumed to be actual deposit inflows.
+
+Step 3: Estimate CLV
+We applied the CLV formula above for each user.
+To avoid errors, we used NULLIF to make sure we don’t divide by zero (for users with tenure less than 1 month).
+
+Notes & Challenges
+
+
+Working on this assessment gave me a solid chance to approach SQL from a real business angle, not just textbook examples. It wasn’t all smooth,I faced a few practical challenges along the way:
+
+Figuring Out Table Relationships
+Some tables weren’t clearly connected, especially linking plans_plan to savings_savingsaccount. I had to carefully study column names (like plan_id and owner_id) and use trial and error to connect the dots and get the correct joins.
+
+Understanding the Table Structure
+The savings_savingsaccount table had a lot of columns, and it wasn’t obvious how to separate inflows from outflows since there was no column like transaction_type. I later figured out that positive confirmed_amount values meant inflows, that insight became very important for answering Questions 3 and 4.
+
+Fixing SQL Errors from Wrong Assumptions
+At first, I tried using columns like created_at or transaction_type, which didn’t actually exist. This led to a few “Unknown column” errors in MySQL. I had to go back, double-check the schema, and use correct names like created_on.
+
+Avoiding Division by Zero
+While calculating CLV in Question 4, I realized that some users were too new and had zero months of tenure. Dividing by zero would break the query, so I used NULLIF() to prevent errors and keep things clean.
+
+Keeping Queries Readable
+I used CTEs (Common Table Expressions) to break queries into steps. This made the SQL easier to read and debug, even though it might not be the most performance-optimized style for very large datasets. For this kind of project, clarity was more important.
+
+
+
+
+
+THANK YOU FOR YOUR TIME 
+
+
+
+FREEDOM OBOH
 

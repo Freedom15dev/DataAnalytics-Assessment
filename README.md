@@ -29,3 +29,32 @@ Step 3: Combine Everything and Filter
 Finally, I joined the user data with the results from Steps 1 and 2.
 Then I filtered to include only users who have both a savings plan and an investment plan.
 The results are sorted by deposit amount (from highest to lowest), and I limited the output to the top 100 users.
+
+
+Question 2 – Transaction Frequency Analysis
+Scenario: The finance team wants to analyze how often customers transact to segment them (e.g., frequent vs. occasional users).
+Task: Calculate the average number of transactions per customer per month and categorize them:
+"High Frequency" (≥10 transactions/month)
+"Medium Frequency" (3-9 transactions/month)
+"Low Frequency" (≤2 transactions/month)
+
+
+How the Query Works:
+Step 1: Get Total Transactions and Active Months
+For each user, I counted the number of transactions from the savings_savingsaccount table.
+To figure out how long they've been active, I calculated the number of months between their first and last confirmed transaction.
+
+Step 2: Calculate Average Transactions per Month
+Here, I divided the total number of transactions by the number of active months.
+This gave me the average number of transactions per month for each user — a good measure of how frequently they use their account.
+
+Step 3: Categorize and Summarize
+Based on their monthly average, I grouped users into:
+
+High frequency (e.g., very regular transactions)
+
+Medium frequency
+
+Low frequency (minimal or infrequent activity)
+
+Finally, I summarized the data, counting how many users fall into each category and calculating their average monthly transactions.
